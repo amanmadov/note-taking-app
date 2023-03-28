@@ -3,54 +3,58 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const exphbs = require('express-handlebars');
+const { engine } = require('express-handlebars');
 const connectDB = require('./config/db');
+const colors = require('colors');
+
 
 
 //#region Initial configs 
 
 dotenv.config({ path: './config/config.env' });
-connectDB();
+const PORT = process.env.PORT || 8282;
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-//#endregion)
-
-
-//#region Logging 
-
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
-
-//#endregion
-
-//#region Handlebars Config 
-
-app.engine(
-  '.hbs',
-  exphbs({
-    defaultLayout: 'main',
-    extname: '.hbs',
-  })
-)
-app.set('view engine', '.hbs')
-
-//#endregion
-
-//#region Static Folder Setup 
-
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 //#endregion
 
 //#region Routes 
 
-app.get('/', (req, res) => {
-    res.send('Home');
-})
+const loginRoutes = require('./routes/authentication/login');
 
 //#endregion
 
-const PORT = process.env.PORT || 3000;
+//#region Handlebars Configuration
 
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
+app.engine('hbs', engine({
+    extname: '.hbs',
+    partialsDir: 'views/partials',
+    runtimeOptions: {
+        allowProtoMethodsByDefault: true,
+        allowProtoPropertiesByDefault: true
+
+    }
+}));
+app.set('view engine', 'hbs');
+
+//#endregion
+
+
+app.use(loginRoutes);
+
+
+app.all('*', (req, res) => {
+    res.render('layouts/authentication/404', { docTitle: 'Page Not Found' });
+})
+
+
+//#region Start Server 
+const startServer = async () => {
+    //await connectDB();
+    app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.underline))
+}
+startServer();
+//#endregion
