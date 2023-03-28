@@ -1,0 +1,33 @@
+{
+  "name": "note-taking-app",
+  "version": "1.0.0",
+  "description": "Touro University GST MSIN 636 Course CRUD App with google authentication functionality.",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app",
+    "dev": "cross-env NODE_ENV=development nodemon app",
+    "postinstall": "node ./scripts/post-install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amanmadov/note-taking-app.git"
+  },
+  "author": "Nury Amanmadov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amanmadov/note-taking-app/issues"
+  },
+  "homepage": "https://github.com/amanmadov/note-taking-app#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.4",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.22"
+  }
+}
