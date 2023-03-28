@@ -8,7 +8,6 @@ const connectDB = require('./config/db');
 const colors = require('colors');
 
 
-
 //#region Initial configs 
 
 dotenv.config({ path: './config/config.env' });
@@ -24,6 +23,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 //#region Routes 
 
 const loginRoutes = require('./routes/authentication/login');
+const signupRoutes = require('./routes/authentication/signup');
 
 //#endregion
 
@@ -44,10 +44,13 @@ app.set('view engine', 'hbs');
 
 
 app.use(loginRoutes);
+app.use(signupRoutes);
 
 
 app.all('*', (req, res) => {
-    res.render('layouts/authentication/404', { docTitle: 'Page Not Found' });
+    console.log('not found....');
+    // res.status(404).json({ result: 'not found' });
+    res.render('layouts/authentication/404', { layout:false, docTitle: 'Page Not Found' });
 })
 
 
