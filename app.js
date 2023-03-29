@@ -8,28 +8,24 @@ const connectDB = require('./config/db');
 const colors = require('colors');
 const passport = require('passport');
 const session = require('express-session');
-// const MongoStore = require('connect-mongo')(session);
 const MongoStore = require('connect-mongo');
+
+const authRoutes = require('./routes/authentication/auth');
+const loginRoutes = require('./routes/authentication/login');
+const signupRoutes = require('./routes/authentication/signup');
+const dashboardRoutes = require('./routes/dashboard');
 
 
 //#region Initial configs 
 
 dotenv.config({ path: './config/config.env' });
-require('./config/passport')(passport)
-const PORT = process.env.PORT || 8282;
+require('./config/passport')(passport);
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
-
-//#endregion
-
-//#region Routes 
-
-const loginRoutes = require('./routes/authentication/login');
-const signupRoutes = require('./routes/authentication/signup');
-const dashboardRoutes = require('./routes/dashboard');
 
 //#endregion
 
@@ -75,10 +71,15 @@ app.use(function (req, res, next) {
 
 //#endregion
 
+//#region Routes 
 
+// app.use(authRoutes);
 app.use(loginRoutes);
 app.use(signupRoutes);
 app.use(dashboardRoutes);
+app.use('/auth', authRoutes)
+
+//#endregion
 
 
 app.all('*', (req, res) => {
@@ -89,7 +90,7 @@ app.all('*', (req, res) => {
 
 //#region Start Server 
 const startServer = async () => {
-    //await connectDB();
+    await connectDB();
     app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.underline))
 }
 startServer();

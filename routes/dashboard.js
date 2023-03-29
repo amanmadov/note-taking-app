@@ -4,7 +4,7 @@ const { ensureAuth } = require('../middleware/authorize');
 
 // @desc    Dashboard
 // @route   GET /dashboard
-// router.get('/dashboard', ensureAuth, getDashboard);
-router.get('/dashboard', getDashboard);
+ router.get('/dashboard', ensureAuth, getDashboard);
+//router.get('/dashboard', getDashboard);
 
 module.exports = router;
