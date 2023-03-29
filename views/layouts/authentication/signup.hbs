@@ -13,7 +13,7 @@
     <main class="form-signin w-100 m-auto">
         <form>
             <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
+            <h1 class="h2 mb-3 fw-normal pb-3">Sign Up</h1>
 
             <div class="form-floating pb-2">
                 <input type="text" class="form-control" id="floatingInput" placeholder="Jon" required="true">
@@ -46,19 +46,18 @@
 
             <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    {{!-- <a class="btn btn-lg btn-google btn-block btn-outline" href="#">
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign up with Google
-                    </a> --}}
-                    <button class="w-100 btn btn-lg btn-primary btn-google" type="submit">
-                        <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" width="16" height="16"> Sign up with Google
-                    </button>
-                </div>
-            </div>
-
-            <p class="mt-5 mb-3 text-body-secondary"> <script>document.write(new Date().getFullYear())</script> © Note App </p>
         </form>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a class="w-100 btn btn-lg btn-primary btn-google" href="/auth/gooogle">
+                    <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" width="16" height="16"> Sign up with Google
+                </a>
+            </div>
+        </div>
+
+        <p class="mt-5 mb-3 text-body-secondary"> <script>document.write(new Date().getFullYear())</script> © Note App </p>
+        
     </main>
 </body>
 </html>

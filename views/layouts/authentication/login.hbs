@@ -13,7 +13,7 @@
     <main class="form-signin w-100 m-auto">
         <form>
             <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Log In</h1>
+            <h1 class="h2 mb-3 fw-normal pb-3">Log In</h1>
 
             <div class="form-floating pb-2">
                 <input type="email" class="form-control" id="emailInput" placeholder="jon.snow@example.com" required="true">
@@ -21,7 +21,7 @@
             </div>
             <div class="form-floating pb-2">
                 <input type="password" class="form-control" id="passwordInput" placeholder="Password" required="true">
-                <label for="v">Password</label>
+                <label for="passwordInput">Password</label>
             </div>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
@@ -35,20 +35,19 @@
                 </div>
             </div>
 
-
-
             <div class="or-container"><div class="line-separator"></div> <div class="or-label">or</div><div class="line-separator"></div></div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="w-100 btn btn-lg btn-primary btn-google" type="submit">
-                        <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" width="16" height="16"> Log in with Google
-                    </button>
-                </div>
-            </div>
-
-            <p class="mt-5 mb-3 text-body-secondary"> <script>document.write(new Date().getFullYear())</script> © Note App </p>
         </form>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a class="w-100 btn btn-lg btn-primary btn-google" href="/auth/google">
+                    <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" width="16" height="16"> Log in with Google
+                </a>
+            </div>
+        </div>
+
+        <p class="mt-5 mb-3 text-body-secondary"> <script>document.write(new Date().getFullYear())</script> © Note App </p>
     </main>
 </body>
 </html>

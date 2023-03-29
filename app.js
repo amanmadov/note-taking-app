@@ -48,7 +48,6 @@ app.use(signupRoutes);
 
 
 app.all('*', (req, res) => {
-    console.log('not found....');
     // res.status(404).json({ result: 'not found' });
     res.render('layouts/authentication/404', { layout:false, docTitle: 'Page Not Found' });
 })
