@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const methodOverride = require('method-override')
 const { engine } = require('express-handlebars');
 const connectDB = require('./config/db');
 const colors = require('colors');
@@ -26,6 +27,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
+// Method override
+app.use(
+    methodOverride ((req, res) => {
+        if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+            let method = req.body._method;
+            delete req.body._method;
+            return method;
+        }
+    })
+)
 
 //#endregion
 
@@ -64,7 +76,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 })

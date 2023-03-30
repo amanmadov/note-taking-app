@@ -11,8 +11,6 @@ module.exports = function (passport) {
                 callbackURL: '/auth/google/callback',
             },
             async (accessToken, refreshToken, profile, done) => {
-                console.log(profile);
-                console.log(profile.emails[0].value);
                 const newUser = {
                     googleId: profile.id,
                     displayName: profile.displayName,
@@ -25,6 +23,7 @@ module.exports = function (passport) {
                 try {
                     
                     let user = await User.findOne({ googleId: profile.id });
+                    console.log(user);
 
                     if (user) {
                         done(null, user);
@@ -46,8 +45,8 @@ module.exports = function (passport) {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            const userFound = await User.find({id});
-            done(null, userFound);
+            const user = await User.find({id});
+            done(null, user);
         } catch (err) {
             console.log(err);
         }
