@@ -26,13 +26,13 @@
 
                 <div class="dropdown" style="padding-right: 20px !important;">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://amanmadov1-dev-ed.my.site.com/webruntime/org-asset/ff35ee07bd/resource/0818c000002oFqT" width="30" height="30">            
+                        <img src={{user.imageUrl}} width="30" height="30"> {{user.displayName}}     
                     </a>
                 
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="user/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
                         <li><a class="dropdown-item" href="/user/notes">My Notes</a></li>
-                        <li><a class="dropdown-item" href="/logout">Log out</a></li>
+                        <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
                     </ul>
                 </div>
 

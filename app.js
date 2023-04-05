@@ -56,7 +56,6 @@ app.set('view engine', 'hbs');
 
 //#endregion
 
-
 //#region Passport middleware / Set User as global var 
 
 //#region Storing Session in DB 
@@ -77,9 +76,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  res.locals.user = req.user || null;
-  next();
-})
+    res.locals.user = req.user || null;
+    next();
+});
 
 //#endregion
 
@@ -89,7 +88,7 @@ app.use((req, res, next) => {
 app.use(loginRoutes);
 app.use(signupRoutes);
 app.use(dashboardRoutes);
-app.use('/auth', authRoutes)
+app.use('/auth', authRoutes);
 
 //#endregion
 
@@ -97,13 +96,13 @@ app.use('/auth', authRoutes)
 app.all('*', (req, res) => {
     // res.status(404).json({ result: 'not found' });
     res.render('layouts/authentication/404', { layout:false, docTitle: 'Page Not Found' });
-})
+});
 
 
 //#region Start Server 
 const startServer = async () => {
     await connectDB();
-    app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.underline))
-}
+    app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green.underline));
+};
 startServer();
 //#endregion

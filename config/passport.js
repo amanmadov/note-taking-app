@@ -23,7 +23,7 @@ module.exports = function (passport) {
                 try {
                     
                     let user = await User.findOne({ googleId: profile.id });
-                    console.log(user);
+                    console.log(`Found user: ` + user);
 
                     if (user) {
                         done(null, user);
@@ -45,7 +45,7 @@ module.exports = function (passport) {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            const user = await User.find({id});
+            const user = await User.findOne({_id: id});
             done(null, user);
         } catch (err) {
             console.log(err);

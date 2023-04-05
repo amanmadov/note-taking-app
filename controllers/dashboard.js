@@ -2,8 +2,11 @@ const Note = require('../models/Note');
 
 exports.getDashboard = async (req, res) => {
     try {
-        const notes = await Note.find({ user: req.user.id }).lean();
-        res.render('layouts/dashboard', { user: req.user });
+        let currentUser = res.locals.user;
+        //console.log(currentUser.displayName);
+        const notes = await Note.find({ user: currentUser }).lean();
+        //console.log(`Notes for user: `, notes)
+        res.render('layouts/dashboard', { user: currentUser });
         // res.render('layouts/main', { })
     } catch (err) {
         console.error(err);
