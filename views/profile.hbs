@@ -1,0 +1,25 @@
+<main class="container">
+    <div class="row row-cols-1 row-cols-md-1 mb-3 text-center pt-40">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Profile Information Details</h4>
+                </div>
+                <div class="card-body">
+                    <img src={{user.imageUrl}} width="120" height="120">
+
+                    <h3 class="card-title pricing-card-title pt-4">
+                        <small class="text-body-secondary fw-light">Display Name: </small>{{user.displayName}}
+                    </h3>
+                    <h3 class="card-title pricing-card-title">
+                        <small class="text-body-secondary fw-light">Username: </small>{{user.email}}
+                    </h3>
+                    <h3 class="card-title pricing-card-title">
+                        <small class="text-body-secondary fw-light">Created Date: </small>{{user.createdDate}}
+                    </h3>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,44 +1,52 @@
 <!-- #region Header Nav -->
-<header data-bs-theme="dark">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
-            </a>
-            <a class="navbar-brand" href="#">Notes App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/users">Users</a></li>
-                    
-                    {{!-- <li><a class="nav-link" href="/public-notes">Public Notes</a></li>
-                    <li><a class="nav-link" href="/private-notes">Private Notes</a></li> --}}
-                </ul>
-
-                {{!-- <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> --}}   
-
-                <div class="dropdown" style="padding-right: 20px !important;">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src={{user.imageUrl}} width="30" height="30"> {{user.displayName}}     
-                    </a>
-                
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
-                        <li><a class="dropdown-item" href="/user/notes">My Notes</a></li>
-                        <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
+<header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-4 mb-4 border-bottom">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
+                </a>
+                <a class="navbar-brand" href="#">Notes App</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item"><a class="nav-link {{#if homeActive}}active{{/if}}" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link {{#if usersActive}}active{{/if}}" href="/user/all">Users</a></li>
+                        
+                        {{!-- <li><a class="nav-link" href="/public-notes">Public Notes</a></li>
+                        <li><a class="nav-link" href="/private-notes">Private Notes</a></li> --}}
                     </ul>
+
+                    {{!-- <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> --}}   
+
+                    <div class="dropdown" style="padding-right: 20px !important;">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src={{user.imageUrl}} width="30" height="30"> {{user.displayName}}     
+                        </a>
+                    
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/user/notes">My Notes</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
+                        </ul>
+                    </div>
+
+
                 </div>
-
-
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto pt-4 text-center">
+      <h1 class="display-4 fw-normal">{{pageTitle}}</h1>
+      <p class="fs-5 text-body-secondary">{{pageText}}</p>
+    </div>
+
 </header>
 <!-- #endregion Header Nav -->

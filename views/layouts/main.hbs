@@ -7,15 +7,14 @@
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        {{>header}}
 
-    {{>header}}
+        <!-- #region Page Content -->
+        {{{body}}}
+        <!-- #endregion Page Content -->
 
-    <!-- #region Page Content -->
-    {{{body}}}
-    <!-- #endregion Page Content -->
-
-    {{>footer}}
-
+    </div>
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
