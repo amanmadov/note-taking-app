@@ -1,28 +1,85 @@
-<main role="main" class="container">
-    <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="125"
-                            xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice"
-                            focusable="false">
-                            <rect width="100%" height="100%" fill="#55595c" /><text x="40%" y="50%" fill="#eceeef"
-                                dy=".5em">Note Title</text>
-                        </svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a card for note content</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-body-secondary">01/01/2022</small>
-                            </div>
+<!-- #region New Note Form -->
+<section>
+    <div class="text-center pb-5">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#noteModal">New Note</button>
+    </div>
+    <!-- #region Modal -->
+    <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="noteModal">New Note</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/user/create-note" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="title" name="title" required placeholder="Note title...">
+                            <label for="title">Note Title</label>
                         </div>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" aria-label="status" id="status" name="status">
+                                <option value="public" selected>Public</option>
+                                <option value="private">Private</option>
+                            </select>
+                            <label for="status">Status</label>
+                        </div>
+                        <div class="form-floating pb-5">
+                            <textarea class="form-control" required placeholder="Note body" id="body" name="body"
+                                style="height: 100px"></textarea>
+                            <label for="body">Note Body</label>
+                        </div>
+                        <button class="w-100 btn btn-primary text-center" type="submit">Save Note</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #endregion Modal -->
+</section>
+<!-- #endregion New Note Form -->
+
+<!-- #region Public Notes -->
+<main class="container">
+    <div class="album py-5 bg-body-tertiary">
+        <h2 class="display-5 fw-normal text-center mb-2">Public Notes</h2>
+        <div class="container">
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="feature col">
+                    <h3 class="fs-2">Note title</h3>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
+                        sentence and probably just keep going until we run out of words.</p>
+                    <a href="#" class="icon-link">
+                        Read More...
+                        <svg class="bi">
+                            <use xlink:href="#chevron-right"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="feature col">
+                    <h3 class="fs-2">Note title</h3>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
+                        sentence and probably just keep going until we run out of words.</p>
+                    <a href="#" class="icon-link">
+                        Read More...
+                        <svg class="bi">
+                            <use xlink:href="#chevron-right"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="feature col">
+                    <h3 class="fs-2">Note title</h3>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
+                        sentence and probably just keep going until we run out of words.</p>
+                    <a href="#" class="icon-link">
+                        Read More...
+                        <svg class="bi">
+                            <use xlink:href="#chevron-right"></use>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<!-- #endregion Public Notes -->

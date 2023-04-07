@@ -47,10 +47,10 @@ app.use(
 app.engine('hbs', engine({
     extname: '.hbs',
     partialsDir: 'views/partials',
+    helpers: require('./utils/helper'),
     runtimeOptions: {
         allowProtoMethodsByDefault: true,
         allowProtoPropertiesByDefault: true
-
     }
 }));
 app.set('view engine', 'hbs');

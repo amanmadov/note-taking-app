@@ -9,7 +9,7 @@ exports.getProfile = (req, res) => {
         let currentUser = res.locals.user;
         pageTitle = `Profile`;
         currentUser.createdDate = formatDate(currentUser.createdAt);
-        console.log(currentUser.createdDate)
+        //console.log(currentUser.createdDate)
         res.render('profile', { pageTitle, user: currentUser });
     } catch (err) {
         console.error(err);
@@ -21,7 +21,7 @@ exports.getUserNotes = async (req, res) => {
     try {
         let currentUser = res.locals.user;
         const notes = await Note.find({ user: currentUser }).lean();
-        res.render('userNotes', { user: currentUser });
+        res.render('userNotes', { notes });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -31,8 +31,25 @@ exports.getUserNotes = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.find().lean();
-        console.log(users);
-        res.render('users', { users,usersActive:true });
+        //console.log(users);
+        pageTitle = `Enrolled Users`;
+        res.render('users', { pageTitle, users, usersActive: true });
+    } catch (err) {
+        console.error(err);
+        res.render('layouts/authentication/404', { docTitle: 'Error Page' });
+    }
+}
+
+exports.postCreateNote = async (req, res) => {
+    try {
+        const note = new Note({
+            title: req.body.title,
+            body: req.body.body,
+            status: req.body.status,
+            user: res.locals.user
+        });
+        await Note.create(note);
+        res.redirect('/');
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
