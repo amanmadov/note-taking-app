@@ -16,6 +16,7 @@ const loginRoutes = require('./routes/authentication/login');
 const signupRoutes = require('./routes/authentication/signup');
 const dashboardRoutes = require('./routes/dashboard');
 const userRoutes = require('./routes/user');
+const noteRoutes = require('./routes/note');
 
 
 //#region Initial configs 
@@ -91,6 +92,7 @@ app.use(signupRoutes);
 app.use(dashboardRoutes);
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+app.use('/note', noteRoutes);
 
 //#endregion
 

@@ -15,37 +15,37 @@
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item"><a class="nav-link {{#if homeActive}}active{{/if}}" aria-current="page" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link {{#if usersActive}}active{{/if}}" href="/user/all">Users</a></li>
-                        
-                        {{!-- <li><a class="nav-link" href="/public-notes">Public Notes</a></li>
-                        <li><a class="nav-link" href="/private-notes">Private Notes</a></li> --}}
+                        <li class="nav-item"><a class="nav-link {{#if randomActive}}active{{/if}}" href="/note/random">Random</a></li>
                     </ul>
 
-                    {{!-- <form class="d-flex" role="search">
+                    <!-- #region Search -->
+                    <form class="d-flex p-2" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form> --}}   
+                    </form>
+                    <!-- #endregion Search -->
 
+                    <!-- #region Profile -->
                     <div class="dropdown" style="padding-right: 20px !important;">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src={{user.imageUrl}} width="30" height="30"> {{user.displayName}}     
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src={{user.imageUrl}} width="30" height="30"> {{user.displayName}}
                         </a>
-                    
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
                             <li><a class="dropdown-item" href="/user/notes">My Notes</a></li>
                             <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
                         </ul>
                     </div>
-
-
+                    <!-- #endregion Profile -->
                 </div>
             </div>
         </nav>
     </div>
 
     <div class="pricing-header p-3 pb-md-4 mx-auto pt-4 text-center">
-      <h1 class="display-4 fw-normal">{{pageTitle}}</h1>
-      <p class="fs-5 text-body-secondary">{{pageText}}</p>
+        <h1 class="display-4 fw-normal">{{pageTitle}}</h1>
+        <p class="fs-5 text-body-secondary">{{pageText}}</p>
     </div>
 
 </header>

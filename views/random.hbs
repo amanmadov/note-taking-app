@@ -1,0 +1,20 @@
+<main class="container">
+    <div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height: 690px;">
+        {{#each randomNotes}}
+        <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 33.3333%; top: 0px;">
+            <div class="card p-3" style="background-color: {{randomColor}};">
+                <figure class="p-3 mb-0">
+                    <blockquote class="blockquote">
+                        <p class="fw-semibold">{{body}}</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mb-0 text-body-secondary text-end">
+                        {{user.firstName}}
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</main>
+
+

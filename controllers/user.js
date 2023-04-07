@@ -31,10 +31,11 @@ exports.getMyNotes = async (req, res) => {
 exports.getUserNotes = async (req, res) => {
     try {
         const userId = req.params.id;
-        const userNotes = await Note.find({ user: userId }).lean().populate('user');
+        const user = await User.findOne({ _id: userId }).lean();
+        const userNotes = await Note.find({ user: userId }).lean();
         userNotes.map(note => { note.createdAt = formatDate(note.createdAt, 'LL') });
-        console.log(userNotes);
-        res.render('userNotes', { userNotes });
+        console.log(user);
+        res.render('userNotes', { userNotes, user });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
