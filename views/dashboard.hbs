@@ -41,43 +41,20 @@
 
 <!-- #region Public Notes -->
 <main class="container">
-    <div class="album py-5 bg-body-tertiary">
+    <div class="album py-5">
         <h2 class="display-5 fw-normal text-center mb-2">Public Notes</h2>
         <div class="container">
-            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                <div class="feature col">
-                    <h3 class="fs-2">Note title</h3>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
-                        sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="icon-link">
-                        Read More...
-                        <svg class="bi">
-                            <use xlink:href="#chevron-right"></use>
-                        </svg>
-                    </a>
+            <div class="row align-items-md-stretch">
+                {{#each publicNotes}}
+                <div class="col-md-6 p-2">
+                    <div class="h-100 p-4 text-bg-dark rounded-3">
+                        <h2>{{substr "30" title}}</h2>
+                        <p>{{substr "150" body}}</p>
+                        {{#isLongBody "150" body}} <a class="btn btn-outline-light" href="/notes/{{_id}}">Read More</a> {{/isLongBody}}
+                        <a class="btn btn-outline-light float-end" style="background-color: {{randomColor}};" href="/user/{{user._id}}">{{user.displayName}}</a>
+                    </div>
                 </div>
-                <div class="feature col">
-                    <h3 class="fs-2">Note title</h3>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
-                        sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="icon-link">
-                        Read More...
-                        <svg class="bi">
-                            <use xlink:href="#chevron-right"></use>
-                        </svg>
-                    </a>
-                </div>
-                <div class="feature col">
-                    <h3 class="fs-2">Note title</h3>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
-                        sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="icon-link">
-                        Read More...
-                        <svg class="bi">
-                            <use xlink:href="#chevron-right"></use>
-                        </svg>
-                    </a>
-                </div>
+                {{/each}}
             </div>
         </div>
     </div>

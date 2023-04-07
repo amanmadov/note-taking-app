@@ -2,13 +2,13 @@ const Note = require('../models/Note');
 const User = require('../models/User');
 const moment = require('moment');
 
-const formatDate = date => moment(date).format('LLLL');
+const formatDate = (date, format) => moment(date).format(format);
 
 exports.getProfile = (req, res) => {
     try {
         let currentUser = res.locals.user;
         pageTitle = `Profile`;
-        currentUser.createdDate = formatDate(currentUser.createdAt);
+        currentUser.createdDate = formatDate(currentUser.createdAt, 'LLLL');
         //console.log(currentUser.createdDate)
         res.render('profile', { pageTitle, user: currentUser });
     } catch (err) {
@@ -17,11 +17,24 @@ exports.getProfile = (req, res) => {
     }
 }
 
-exports.getUserNotes = async (req, res) => {
+exports.getMyNotes = async (req, res) => {
     try {
         let currentUser = res.locals.user;
         const notes = await Note.find({ user: currentUser }).lean();
-        res.render('userNotes', { notes });
+        res.render('myNotes', { notes });
+    } catch (err) {
+        console.error(err);
+        res.render('layouts/authentication/404', { docTitle: 'Error Page' });
+    }
+}
+
+exports.getUserNotes = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const userNotes = await Note.find({ user: userId }).lean().populate('user');
+        userNotes.map(note => { note.createdAt = formatDate(note.createdAt, 'LL') });
+        console.log(userNotes);
+        res.render('userNotes', { userNotes });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
