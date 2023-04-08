@@ -8,7 +8,7 @@ const daysPassed = (givendate) => moment.duration(givendate.diff(moment().startO
 exports.getProfile = (req, res) => {
     try {
         let currentUser = res.locals.user;
-        pageTitle = `Profile`;
+        let pageTitle = `Profile`;
         currentUser.createdDate = formatDate(currentUser.createdAt, 'LLLL');
         currentUser.activeSince = Math.abs(Math.floor(daysPassed(moment(currentUser.createdAt))));
         res.render('profile', { pageTitle, loggedInUser: currentUser });
@@ -22,7 +22,11 @@ exports.getMyNotes = async (req, res) => {
     try {
         let currentUser = res.locals.user;
         const notes = await Note.find({ user: currentUser }).lean();
-        res.render('my-notes', { notes, loggedInUser: res.locals.user });
+        let pageTitle = `My Notes`;
+        let pageText;
+        if (notes.length > 0) pageText = `You have created ${notes.length} notes in total...`;
+        else pageText = `You have not created any note yet.`;
+        res.render('my-notes', { notes, loggedInUser: res.locals.user, pageTitle, pageText });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -32,10 +36,19 @@ exports.getMyNotes = async (req, res) => {
 exports.getUserNotes = async (req, res) => {
     try {
         const userId = req.params.id;
-        const user = await User.findOne({ _id: userId }).lean();
-        const userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({ 'createdAt': -1 }).limit(30);
+        let userNotes = [];
+        let user;
+        let isSameUser = false;
+        if(userId !== res.locals.user._id.toString()) {
+            user = await User.findOne({ _id: userId }).lean();
+            userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({ 'createdAt': -1 }).limit(30);
+        } else {
+            isSameUser = true;
+            user = res.locals.user;
+            userNotes = await Note.find({ user: userId}).lean().sort({ 'createdAt': -1 }).limit(30);
+        }
         userNotes.map(note => { note.createdAt = formatDate(note.createdAt, 'LL') });
-        res.render('user-notes', { userNotes, user, loggedInUser: res.locals.user });
+        res.render('user-notes', { userNotes, user, loggedInUser: res.locals.user, isSameUser });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -45,7 +58,7 @@ exports.getUserNotes = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.find().lean().sort({ 'createdAt': -1 });
-        pageTitle = `Enrolled Users`;
+        let pageTitle = `Enrolled Users`;
         res.render('users', { pageTitle, users, loggedInUser: res.locals.user, usersActive: true });
     } catch (err) {
         console.error(err);

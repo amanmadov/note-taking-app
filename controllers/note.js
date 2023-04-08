@@ -30,8 +30,8 @@ const queryRandomNote = async (noteCount) => {
 exports.getRandomNotes = async (req, res) => {
     try {
         const randomNotes = await queryRandomNote(8);
-        pageTitle = `Random Notes`;
-        pageText = `Here are some random notes...`;
+        let pageTitle = `Random Notes`;
+        let pageText = `Here are some random notes...`;
         res.render('random', { randomNotes, pageTitle, pageText, randomActive: true, addMasonryScript: true, loggedInUser: res.locals.user });
     } catch (err) {
         console.error(err);
@@ -43,8 +43,8 @@ exports.getNoteDetails = async (req, res) => {
     try {
         let noteId = req.params.id;
         const note = await Note.findOne({ _id: noteId }).lean().populate('user', 'displayName');
-        pageTitle = `${note.title}`;
-        pageText = `Author: ${note.user.displayName}`;
+        let pageTitle = `${note.title}`;
+        let pageText = `Author: ${note.user.displayName}`;
         res.render('note-detail', { note, pageTitle, pageText, loggedInUser: res.locals.user });
     } catch (err) {
         console.error(err);
@@ -56,8 +56,8 @@ exports.getNoteEditForm = async (req, res) => {
     try {
         let noteId = req.params.id;
         const note = await Note.findOne({ _id: noteId }).lean().populate('user', 'displayName');
-        pageTitle = `Edit Note`;
-        pageText = `Use form below to edit the content of your note...`;
+        let pageTitle = `Edit Note`;
+        let pageText = `Use form below to edit the content of your note...`;
         res.render('note-edit-form', { note, pageTitle, pageText, loggedInUser: res.locals.user });
     } catch (err) {
         console.error(err);

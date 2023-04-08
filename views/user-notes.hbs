@@ -2,7 +2,8 @@
     <div class="container px-4 py-5" id="hanging-icons">
         <div class="row p-4">
             <div class="col-lg-12 text-center">
-                 <img src="{{user.imageUrl}}" width="120" height="120" class="rounded-circle" alt="profile image of {{user.displayName}}">
+                <img src="{{user.imageUrl}}" width="120" height="120" class="rounded-circle"
+                    alt="profile image of {{user.displayName}}">
                 <h2 class="pb-3 border-bottom">Notes by {{user.displayName}}</h2>
             </div>
         </div>
@@ -23,7 +24,10 @@
                     <td>{{substr "30" title}}</td>
                     <td>{{substr "60" body}}</td>
                     <td>{{createdAt}}</td>
-                    <td><a class="btn btn-primary" href="/note/{{_id}}">Details</a></td>
+                    <td>
+                        <a class="btn btn-primary" href="/note/{{_id}}">Read</a>
+                        {{#if ../isSameUser}}<a class="btn btn-warning" href="/note/edit/{{_id}}">Edit</a>{{/if}}
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
