@@ -42,10 +42,10 @@ exports.getRandomNotes = async (req, res) => {
 exports.getNoteDetails = async (req, res) => {
     try {
         let noteId = req.params.id;
-        const note = await Note.findOne({ _id: noteId }).lean().populate('user', 'displayName');
+        const note = await Note.findOne({ _id: noteId }).lean().populate('user', 'displayName firstName');
         let pageTitle = `${note.title}`;
         let pageText = `Author: ${note.user.displayName}`;
-        res.render('note-detail', { note, pageTitle, pageText, loggedInUser: res.locals.user });
+        res.render('note-detail', { note, loggedInUser: res.locals.user });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -73,6 +73,19 @@ exports.postNoteEditForm = async (req, res) => {
         note.body = req.body.body;
         note.status = req.body.status;
         await note.save();
+        res.redirect('/user/notes');
+    } catch (err) {
+        console.error(err);
+        res.render('layouts/authentication/404', { docTitle: 'Error Page' });
+    }
+}
+
+exports.postDeleteNote = async (req, res) => {
+    try {
+        let noteId = req.body.id;
+        //TODO: check if author
+        await Note.findByIdAndDelete(noteId);
+        //console.log(`Note with id ${noteId} has been deleted...`);
         res.redirect('/user/notes');
     } catch (err) {
         console.error(err);

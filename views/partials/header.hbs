@@ -1,7 +1,7 @@
 <!-- #region Header Nav -->
 <header>
     <div class="d-flex flex-column flex-md-row align-items-center pb-4 mb-4 border-bottom">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top text-bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img src="/assets/brand/bootstrap-logo.svg" width="30" height="24">
@@ -19,9 +19,9 @@
                     </ul>
 
                     <!-- #region Search -->
-                    <form class="d-flex p-2" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search note..." aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    <form class="p-2" role="search" data-bs-theme="dark">
+                        <input class="form-control" type="search" placeholder="Search note..." aria-label="Search">
+                        {{!-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
                     </form>
                     <!-- #endregion Search -->
 
@@ -31,10 +31,11 @@
                             aria-expanded="false">
                             <img src={{loggedInUser.imageUrl}} width="30" height="30"> {{loggedInUser.displayName}}
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
-                            <li><a class="dropdown-item" href="/user/notes">My Notes</a></li>
-                            <li><a class="dropdown-item" href="/auth/logout">Log out</a></li>
+                        <ul class="dropdown-menu" data-bs-theme="dark">
+                            <li><a class="dropdown-item rounded-2" href="/user/profile">Profile</a></li>
+                            <li><a class="dropdown-item rounded-2" href="/user/notes">My Notes</a></li>
+                            <li><hr class="dropdown-divider rounded-2"></li>
+                            <li><a class="dropdown-item rounded-2 active" href="/auth/logout">Log out</a></li>
                         </ul>
                     </div>
                     <!-- #endregion Profile -->

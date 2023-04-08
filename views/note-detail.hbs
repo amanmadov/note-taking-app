@@ -1,6 +1,10 @@
 <main class="container">
-    <div>
-        <p class="fs-2 text-center fw-semibold text-body">{{note.body}}</p>
-        
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3 text-center">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">{{note.title}}</h1>
+            <h5 class="pt-2 pb-4">Author: {{note.user.displayName}}</h5>
+            <p class="col-md-12 fs-4">{{note.body}}</p>
+            <a class="btn btn-outline-primary mt-4 fw-semibold" href="/user/{{note.user._id}}">Notes by {{note.user.firstName}}</a>
+        </div>
     </div>
 </main>

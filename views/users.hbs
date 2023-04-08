@@ -1,8 +1,8 @@
 <main class="conainer">
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center justify-content-center">
         {{#each users}}
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
                 <div class="card-header py-3">
                     <h4 class="my-0 fw-normal">{{displayName}}</h4>
                 </div>
@@ -10,8 +10,8 @@
                     <img class="mb-4" src={{imageUrl}} width="120" height="120">
                     <a href="/user/{{_id}}" class="w-100 btn btn-lg btn-outline-primary">Read Users Notes</a>
                 </div>
-                </div>
             </div>
+        </div>
         {{/each}}
     </div>
 </main>

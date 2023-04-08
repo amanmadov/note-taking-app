@@ -1,7 +1,8 @@
 <!-- #region New Note Form -->
 <section>
     <div class="text-center pb-3">
-        <button type="button" class="btn btn-primary pulsingButton" data-bs-toggle="modal" data-bs-target="#noteModal">New Note</button>
+        <button type="button" class="btn btn-primary pulsing-button" data-bs-toggle="modal"
+            data-bs-target="#noteModal">New Note</button>
     </div>
     <!-- #region Modal -->
     <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModal" aria-hidden="true">
@@ -14,7 +15,8 @@
                 <div class="modal-body">
                     <form action="/user/create-note" method="post">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="title" name="title" required placeholder="Note title...">
+                            <input type="text" class="form-control" id="title" name="title" required
+                                placeholder="Note title...">
                             <label for="title">Note Title</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -50,8 +52,9 @@
                     <div class="h-100 p-4 text-bg-dark rounded-3">
                         <h4>{{substr "25" title}}</h4>
                         <p>{{substr "150" body}}</p>
-                        {{#isLongBody "150" body}} <a class="btn btn-outline-light" href="/note/{{_id}}">Read More</a> {{/isLongBody}}
-                        <a class="btn btn-outline-light float-end" style="background-color: {{randomColor}};" href="/user/{{user._id}}">{{user.displayName}}</a>
+                        <span class="blockquote-footer mb-0 text-end">{{user.displayName}}</span>
+                        {{#isLongBody "150" body}}<a class="btn btn-outline-light float-end"
+                            style="background-color: {{randomColor}};" href="/note/{{_id}}">Read More</a>{{/isLongBody}}
                     </div>
                 </div>
                 {{/each}}

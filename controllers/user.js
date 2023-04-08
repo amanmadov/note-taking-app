@@ -21,7 +21,7 @@ exports.getProfile = (req, res) => {
 exports.getMyNotes = async (req, res) => {
     try {
         let currentUser = res.locals.user;
-        const notes = await Note.find({ user: currentUser }).lean();
+        const notes = await Note.find({ user: currentUser }).lean().sort({ 'createdAt': -1 }).limit(100);
         let pageTitle = `My Notes`;
         let pageText;
         if (notes.length > 0) pageText = `You have created ${notes.length} notes in total...`;
@@ -39,6 +39,7 @@ exports.getUserNotes = async (req, res) => {
         let userNotes = [];
         let user;
         let isSameUser = false;
+        // TODO: refactor
         if (userId !== res.locals.user._id.toString()) {
             user = await User.findOne({ _id: userId }).lean();
             userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({ 'createdAt': -1 }).limit(30);
@@ -68,6 +69,7 @@ exports.getAllUsers = async (req, res) => {
 
 exports.postCreateNote = async (req, res) => {
     try {
+        backURL = req.header('Referer') || '/';
         const note = new Note({
             title: req.body.title,
             body: req.body.body,
@@ -75,7 +77,8 @@ exports.postCreateNote = async (req, res) => {
             user: res.locals.user
         });
         await Note.create(note);
-        res.redirect('/');
+        console.log(`Previous route: ` + req.headers.referer);
+        res.redirect(backURL);
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
