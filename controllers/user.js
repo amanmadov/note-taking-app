@@ -11,7 +11,7 @@ exports.getProfile = (req, res) => {
         pageTitle = `Profile`;
         currentUser.createdDate = formatDate(currentUser.createdAt, 'LLLL');
         currentUser.activeSince = Math.abs(Math.floor(daysPassed(moment(currentUser.createdAt))));
-        res.render('profile', { pageTitle, user: currentUser });
+        res.render('profile', { pageTitle, loggedInUser: currentUser });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -22,7 +22,7 @@ exports.getMyNotes = async (req, res) => {
     try {
         let currentUser = res.locals.user;
         const notes = await Note.find({ user: currentUser }).lean();
-        res.render('my-notes', { notes });
+        res.render('my-notes', { notes, loggedInUser: res.locals.user });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -33,9 +33,9 @@ exports.getUserNotes = async (req, res) => {
     try {
         const userId = req.params.id;
         const user = await User.findOne({ _id: userId }).lean();
-        const userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({'createdAt': -1}).limit(30);
+        const userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({ 'createdAt': -1 }).limit(30);
         userNotes.map(note => { note.createdAt = formatDate(note.createdAt, 'LL') });
-        res.render('user-notes', { userNotes, user });
+        res.render('user-notes', { userNotes, user, loggedInUser: res.locals.user });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -44,9 +44,9 @@ exports.getUserNotes = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.find().lean().sort({'createdAt': -1});
+        const users = await User.find().lean().sort({ 'createdAt': -1 });
         pageTitle = `Enrolled Users`;
-        res.render('users', { pageTitle, users, usersActive: true });
+        res.render('users', { pageTitle, users, loggedInUser: res.locals.user, usersActive: true });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
