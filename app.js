@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // Method override
 app.use(
-    methodOverride ((req, res) => {
+    methodOverride((req, res) => {
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
             let method = req.body._method;
             delete req.body._method;
@@ -99,7 +99,7 @@ app.use('/note', noteRoutes);
 
 app.all('*', (req, res) => {
     // res.status(404).json({ result: 'not found' });
-    res.render('layouts/authentication/404', { layout:false, docTitle: 'Page Not Found' });
+    res.render('layouts/authentication/404', { layout: false, docTitle: 'Page Not Found' });
 });
 
 

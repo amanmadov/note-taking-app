@@ -1,0 +1,51 @@
+/*#region Custom Pulsing Button */
+
+.pulsingButton {
+	width: 150px;
+	box-shadow: 0 0 0 0 rgba(16, 78, 202, 0.7);
+	-webkit-animation: pulsing 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	-moz-animation: pulsing 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	-ms-animation: pulsing 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	animation: pulsing 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	color: #ffffff;
+	transition: all 1500ms ease-in-out;
+}
+
+.pulsingButton:hover {
+	-webkit-animation: none;
+	-moz-animation: none;
+	-ms-animation: none;
+	animation: none;
+	color: #ffffff;
+}
+
+/*#endregion */
+
+/*#region Animation*/
+
+@-webkit-keyframes pulsing {
+	to {
+		box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+	}
+}
+
+@-moz-keyframes pulsing {
+	to {
+		box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+	}
+}
+
+@-ms-keyframes pulsing {
+	to {
+		box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+	}
+}
+
+@keyframes pulsing {
+	to {
+		box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+	}
+}
+
+/*#endregion */
+

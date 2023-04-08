@@ -9,7 +9,7 @@ exports.getProfile = (req, res) => {
     try {
         let currentUser = res.locals.user;
         let pageTitle = `Profile`;
-        currentUser.createdDate = formatDate(currentUser.createdAt, 'LLLL');
+        currentUser.createdDate = formatDate(currentUser.createdAt, 'MMMM Do YYYY');
         currentUser.activeSince = Math.abs(Math.floor(daysPassed(moment(currentUser.createdAt))));
         res.render('profile', { pageTitle, loggedInUser: currentUser });
     } catch (err) {
@@ -39,13 +39,13 @@ exports.getUserNotes = async (req, res) => {
         let userNotes = [];
         let user;
         let isSameUser = false;
-        if(userId !== res.locals.user._id.toString()) {
+        if (userId !== res.locals.user._id.toString()) {
             user = await User.findOne({ _id: userId }).lean();
             userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({ 'createdAt': -1 }).limit(30);
         } else {
             isSameUser = true;
             user = res.locals.user;
-            userNotes = await Note.find({ user: userId}).lean().sort({ 'createdAt': -1 }).limit(30);
+            userNotes = await Note.find({ user: userId }).lean().sort({ 'createdAt': -1 }).limit(30);
         }
         userNotes.map(note => { note.createdAt = formatDate(note.createdAt, 'LL') });
         res.render('user-notes', { userNotes, user, loggedInUser: res.locals.user, isSameUser });

@@ -2,7 +2,7 @@
     <div class="container px-4 py-5" id="hanging-icons">
         {{!-- <h1 class="pb-4 border-bottom text-center">My Notes</h1> --}}
         {{#each notes}}
-        <div class="navbar navbar-expand-lg bg-body-tertiary rounded">
+        <div class="navbar navbar-expand-lg bg-body-tertiary rounded border p-2 m-2">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse d-lg-flex">
                     <div class="d-lg-flex col-lg-1">
@@ -12,12 +12,12 @@
                             {{#ifeq status "public"}} Public {{else}} Private {{/ifeq}}
                         </span>
                     </div>
-                    <div class="navbar-brand col-lg-3 me-0">{{substr "30" title}}</div>
+                    <div class="navbar-brand col-lg-3 me-0">{{substr "25" title}}</div>
                     <div class="d-lg-flex col-lg-7">
                         <p class="text-left" style="margin-block-end: 0 !important;">{{substr "80" body}}</p>
                     </div>
                     <div class="d-lg-flex col-lg-1 justify-content-lg-end">
-                        <a href="/note/edit/{{_id}}" class="btn btn-warning">Edit Note</a>
+                        <a href="/note/edit/{{_id}}" class="btn btn-warning fw-semibold">Edit</a>
                     </div>
                 </div>
             </div>
