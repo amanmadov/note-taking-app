@@ -3,8 +3,7 @@ const Note = require('../models/Note');
 exports.getDashboard = async (req, res) => {
     try {
         let currentUser = res.locals.user;
-        //console.log(currentUser.displayName);
-        const publicNotes = await Note.find({ status: 'public' }).lean().populate('user');
+        const publicNotes = await Note.find({ status: 'public' }).lean().populate('user', 'displayName').sort({'createdAt': -1}).limit(15);
         pageTitle = `Welcome ${currentUser.displayName}`;
         pageText = 'Start typing your notes....';
         res.render('dashboard', { pageTitle, pageText, publicNotes, user: currentUser, homeActive: true });

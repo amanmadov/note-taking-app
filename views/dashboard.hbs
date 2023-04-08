@@ -46,9 +46,9 @@
         <div class="container">
             <div class="row align-items-md-stretch">
                 {{#each publicNotes}}
-                <div class="col-md-6 p-2">
+                <div class="col-md-4 p-2">
                     <div class="h-100 p-4 text-bg-dark rounded-3">
-                        <h2>{{substr "30" title}}</h2>
+                        <h4>{{substr "25" title}}</h4>
                         <p>{{substr "150" body}}</p>
                         {{#isLongBody "150" body}} <a class="btn btn-outline-light" href="/note/{{_id}}">Read More</a> {{/isLongBody}}
                         <a class="btn btn-outline-light float-end" style="background-color: {{randomColor}};" href="/user/{{user._id}}">{{user.displayName}}</a>

@@ -1,0 +1,27 @@
+<main class="container text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-6 align-self-center">
+            <form method="post">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="title" name="title" required value="{{note.title}}">
+                    <label for="title">Note Title</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" aria-label="status" id="status" name="status">
+                        <option value="public" {{#ifeq note.status "public"}} selected {{/ifeq}}>Public</option>
+                        <option value="private" {{#ifeq note.status "private"}} selected {{/ifeq}}>Private</option>
+                    </select>
+                    <label for="status">Status</label>
+                </div>
+                <div class="form-floating pb-5">
+                    <textarea class="form-control" required id="body" name="body"
+                        style="height: 200px">{{note.body}}</textarea>
+                    <label for="body">Note Body</label>
+                </div>
+                <input type="hidden" value="{{note._id}}" name="id" id="id">
+                <button class="w-100 btn btn-primary text-center" type="submit">Save Note</button>
+            </form>
+        </div>
+    </div>
+
+</main>

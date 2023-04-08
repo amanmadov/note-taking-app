@@ -3,13 +3,14 @@ const User = require('../models/User');
 const moment = require('moment');
 
 const formatDate = (date, format) => moment(date).format(format);
+const daysPassed = (givendate) => moment.duration(givendate.diff(moment().startOf('day'))).asDays();
 
 exports.getProfile = (req, res) => {
     try {
         let currentUser = res.locals.user;
         pageTitle = `Profile`;
         currentUser.createdDate = formatDate(currentUser.createdAt, 'LLLL');
-        //console.log(currentUser.createdDate)
+        currentUser.activeSince = Math.abs(Math.floor(daysPassed(moment(currentUser.createdAt))));
         res.render('profile', { pageTitle, user: currentUser });
     } catch (err) {
         console.error(err);
@@ -21,7 +22,7 @@ exports.getMyNotes = async (req, res) => {
     try {
         let currentUser = res.locals.user;
         const notes = await Note.find({ user: currentUser }).lean();
-        res.render('myNotes', { notes });
+        res.render('my-notes', { notes });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -32,10 +33,9 @@ exports.getUserNotes = async (req, res) => {
     try {
         const userId = req.params.id;
         const user = await User.findOne({ _id: userId }).lean();
-        const userNotes = await Note.find({ user: userId }).lean();
+        const userNotes = await Note.find({ user: userId, status: 'public' }).lean().sort({'createdAt': -1}).limit(30);
         userNotes.map(note => { note.createdAt = formatDate(note.createdAt, 'LL') });
-        console.log(user);
-        res.render('userNotes', { userNotes, user });
+        res.render('user-notes', { userNotes, user });
     } catch (err) {
         console.error(err);
         res.render('layouts/authentication/404', { docTitle: 'Error Page' });
@@ -44,8 +44,7 @@ exports.getUserNotes = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.find().lean();
-        //console.log(users);
+        const users = await User.find().lean().sort({'createdAt': -1});
         pageTitle = `Enrolled Users`;
         res.render('users', { pageTitle, users, usersActive: true });
     } catch (err) {
